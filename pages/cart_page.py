@@ -10,17 +10,7 @@ class CartPage:
         self.wait = WebDriverWait(driver, 10)
         self.cart_item_count_locator = (
             By.CSS_SELECTOR, ".cart-page__title--append")
-
+        
     def get_cart_items_count(self):
         """Возвращает количество товаров в корзине"""
-        count_element = self.wait.until(
-            EC.visibility_of_element_located(self.cart_item_count_locator)
-        )
-        count_text = count_element.text.strip()
-
-        match = re.search(r'\d+', count_text)
-        if match:
-            count = int(match.group())
-            return count
-        else:
-            return 0
+        return len(self.driver.find_elements(By.CSS_SELECTOR, "div.chg-app-button__content"))

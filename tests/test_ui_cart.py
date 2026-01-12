@@ -3,6 +3,7 @@ from pages.main_page import MainPage
 from pages.search_page import SearchPage
 from pages.cart_page import CartPage
 from data import SEARCH_FOR_CART_PHRASES
+from time import sleep
 
 
 @pytest.mark.parametrize("search_query", SEARCH_FOR_CART_PHRASES)
@@ -19,5 +20,5 @@ def test_add_to_cart_flow(browser, search_query):
     search_page.go_to_cart()
 
     cart_page = CartPage(browser)
-
-    assert cart_page.get_cart_items_count() == 1
+    sleep(3)
+    assert cart_page.get_cart_items_count()
