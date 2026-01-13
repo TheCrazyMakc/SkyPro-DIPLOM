@@ -1,9 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.keys import Keys
 from time import sleep
-import time
 
 
 class Footer:
@@ -54,10 +52,14 @@ class Footer:
         """Кликает на пункт меню"""
         self.scroll_to_footer()
         element = self.find_clickable_element(locator)
-        try:
-            element.click()
-        except Exception:
-            # Если прямой клик не срабатывает, можно кликом через JS как запасной вариант
-            self.driver.execute_script("arguments[0].click();", element)
+        element.click()
         print(f"✅ Клик на '{item_name}' выполнен")
+        # Ждем загрузки новой страницы
         self.wait.until(EC.url_changes(self.driver.current_url))
+        # try:
+        #     element.click()
+        # except Exception:
+        #     # Если прямой клик не срабатывает, можно кликом через JS как запасной вариант
+        #     self.driver.execute_script("arguments[0].click();", element)
+        # print(f"✅ Клик на '{item_name}' выполнен")
+        # self.wait.until(EC.url_changes(self.driver.current_url))
